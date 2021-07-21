@@ -1,5 +1,70 @@
 /* BASE STYLES */
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  border-collapse: collapse; }
+
+.container {
+  display: grid;
+  grid-template-columns: auto auto; }
+
+.left-container {
+  display: inline-block; }
+
+.right-container {
+  display: inline-block; }
+
 /* LAYOUTS */
+#title {
+  font-size: 3rem;
+  font-family: Courier, monospace; }
+
 /* MODULES */
+#game {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  grid-template-rows: repeat(3, auto);
+  margin-top: 100px;
+  height: 540px;
+  width: 540px;
+  border: 1px solid black; }
+
+.box {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  grid-template-rows: repeat(3, auto);
+  height: 180px;
+  width: 180px; }
+
+.cell {
+  height: 60px;
+  width: 60px;
+  border: 1px solid black;
+  text-align: center;
+  line-height: 60px;
+  font-size: 1rem;
+  font-family: monospace; }
+
+.numpad {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  grid-template-rows: repeat(3, auto);
+  height: 300px;
+  width: 300px;
+  border: 1px solid black; }
+
+.numpad-cell {
+  display: inline-block;
+  height: 100px;
+  width: 100px;
+  border: 1px solid black;
+  text-align: center;
+  line-height: 100px;
+  font-size: 2rem;
+  font-family: monospace; }
 
 /*# sourceMappingURL=style.css.map */

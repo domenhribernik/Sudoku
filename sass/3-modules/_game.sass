@@ -1,0 +1,28 @@
+#game
+    position: relative
+    left: 50%
+    transform: translateX(-50%)
+    display: grid
+    grid-template-columns: repeat($cell-num/3, auto)
+    grid-template-rows: repeat($cell-num/3, auto)
+    margin-top: 100px
+    height: $game-size
+    width: $game-size
+    border: $basic-border
+
+.box
+    display: grid
+    grid-template-columns: repeat($cell-num/3, auto)
+    grid-template-rows: repeat($cell-num/3, auto)
+    height: $box-size
+    width: $box-size
+    // border: $basic-border
+
+.cell
+    height: $cell-size
+    width: $cell-size
+    border: $basic-border
+    text-align: center
+    line-height: $cell-size
+    font-size: 1rem
+    font-family: monospace
