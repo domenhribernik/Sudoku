@@ -13,7 +13,30 @@ const generateGame = () => {
         for (let j = 0; j < Math.pow(boxSize, 2); j++) {
             boxArr.push((i+1).toString()+(j+1).toString())
             let cell = document.createElement("div")
-            cell.innerText = (i+1).toString()+"x"+(j+1).toString()
+            //row
+            // i==0&&[0,1,2].includes(j)||i==1&&[0,1,2].includes(j)||i==2&&[0,1,2].includes(j)?cell.style.background="#0A2F51":
+            // i==0&&[3,4,5].includes(j)||i==1&&[3,4,5].includes(j)||i==2&&[3,4,5].includes(j)?cell.style.background="#0E4D64":
+            // i==0&&[6,7,8].includes(j)||i==1&&[6,7,8].includes(j)||i==2&&[6,7,8].includes(j)?cell.style.background="#137177":
+            // i==3&&[0,1,2].includes(j)||i==4&&[0,1,2].includes(j)||i==5&&[0,1,2].includes(j)?cell.style.background="#188977":
+            // i==3&&[3,4,5].includes(j)||i==4&&[3,4,5].includes(j)||i==5&&[3,4,5].includes(j)?cell.style.background="#1D9A6C":
+            // i==3&&[6,7,8].includes(j)||i==4&&[6,7,8].includes(j)||i==5&&[6,7,8].includes(j)?cell.style.background="#39A96B":
+            // i==6&&[0,1,2].includes(j)||i==7&&[0,1,2].includes(j)||i==8&&[0,1,2].includes(j)?cell.style.background="#56B870":
+            // i==6&&[3,4,5].includes(j)||i==7&&[3,4,5].includes(j)||i==8&&[3,4,5].includes(j)?cell.style.background="#74C67A":
+            // i==6&&[6,7,8].includes(j)||i==7&&[6,7,8].includes(j)||i==8&&[6,7,8].includes(j)?cell.style.background="#99D492":null
+
+            //col
+            // i==0&&[0,3,6].includes(j)||i==3&&[0,3,6].includes(j)||i==6&&[0,3,6].includes(j)?cell.style.background="#0A2F51":
+            // i==0&&[1,4,7].includes(j)||i==3&&[1,4,7].includes(j)||i==6&&[1,4,7].includes(j)?cell.style.background="#0E4D64":
+            // i==0&&[2,5,8].includes(j)||i==3&&[2,5,8].includes(j)||i==6&&[2,5,8].includes(j)?cell.style.background="#137177":
+            // i==1&&[0,3,6].includes(j)||i==4&&[0,3,6].includes(j)||i==7&&[0,3,6].includes(j)?cell.style.background="#188977":
+            // i==1&&[1,4,7].includes(j)||i==4&&[1,4,7].includes(j)||i==7&&[1,4,7].includes(j)?cell.style.background="#1D9A6C":
+            // i==1&&[2,5,8].includes(j)||i==4&&[2,5,8].includes(j)||i==7&&[2,5,8].includes(j)?cell.style.background="#39A96B":
+            // i==2&&[0,3,6].includes(j)||i==5&&[0,3,6].includes(j)||i==8&&[0,3,6].includes(j)?cell.style.background="#56B870":
+            // i==2&&[1,4,7].includes(j)||i==5&&[1,4,7].includes(j)||i==8&&[1,4,7].includes(j)?cell.style.background="#74C67A":
+            // i==2&&[2,5,8].includes(j)||i==5&&[2,5,8].includes(j)||i==8&&[2,5,8].includes(j)?cell.style.background="#99D492":null
+
+
+            cell.innerText = (i).toString()+"x"+(j).toString()
             cell.classList.add(`cell`, `cell${j}`)
             box.appendChild(cell)
         }
