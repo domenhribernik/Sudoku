@@ -31,7 +31,7 @@
   margin-top: 100px;
   height: 540px;
   width: 540px;
-  border: 1px solid black; }
+  border-collapse: collapse; }
 
 .box {
   display: grid;
@@ -43,11 +43,13 @@
 .cell {
   height: 60px;
   width: 60px;
-  border: 1px solid black;
   text-align: center;
   line-height: 60px;
   font-size: 1rem;
   font-family: monospace; }
+
+.cell:nth-child(n+2) {
+  background: red; }
 
 .numpad {
   display: grid;
