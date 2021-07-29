@@ -4,8 +4,16 @@ const gameSize = 9 //row
 const boxSize = 3
 const numpadSize = 3
 let gameArr = []
+let rangeArr = []
+let selectedCell
+let newValue
 
-const generateGame = () => {
+let gameLoader = () => {
+  generateGame()
+  generateNumpad()
+}
+
+let generateGame = () => {
     for (let i = 0; i < gameSize; i++) {
         let boxArr = []
         let box = document.createElement("div")
@@ -33,9 +41,9 @@ const generateGame = () => {
             i==2&&[0,3,6].includes(j)||i==5&&[0,3,6].includes(j)||i==8&&[0,3,6].includes(j)?cell.classList.add("col6"):
             i==2&&[1,4,7].includes(j)||i==5&&[1,4,7].includes(j)||i==8&&[1,4,7].includes(j)?cell.classList.add("col7"):
             i==2&&[2,5,8].includes(j)||i==5&&[2,5,8].includes(j)||i==8&&[2,5,8].includes(j)?cell.classList.add("col8"):null
-
+            cell.addEventListener("click", changeSquare)
             cell.innerText = (i).toString()+"x"+(j).toString()
-            cell.classList.add(`cell`, `cell${j}`)
+            cell.classList.add(`cell`, `cell${i}`)
             box.appendChild(cell)
         }
         gameArr.push(boxArr)
@@ -44,14 +52,39 @@ const generateGame = () => {
     console.log(gameArr);
 }
 
-const generateNumpad = () => {
+let generateNumpad = () => {
     for (let i = 0; i < numpadSize; i++) {
         for (let j = 0; j < numpadSize; j++) {
             let cell = document.createElement("div")
+            cell.addEventListener("click", changeContent)
             cell.classList.add("numpad-cell", `number${(i+1)*(j+1)}`)
             cell.innerText = `${(i+1)*(j+1)}`
             numpad.appendChild(cell)
         }
     }
     console.log(numpad);
+}
+
+let changeSquare = e => {
+  game.childNodes.forEach(e => e.childNodes.forEach(el => el.style.background = "white"))
+  selectedCell = e.target
+  console.log(selectedCell);
+  rangeArr = Array.from(game.getElementsByClassName(selectedCell.classList[0])).concat(Array.from(game.getElementsByClassName(selectedCell.classList[1])), Array.from(game.getElementsByClassName(selectedCell.classList[3])))
+  rangeArr.forEach(e => e.style.background = "#E2EBF3")
+  Array.from(game.getElementsByClassName("cell")).forEach(e => e.innerText === selectedCell.innerText?e.style.background="#BCDFF9":null)
+  selectedCell.style.background = "#BCDFF9"
+}
+//red outline error - fix it 
+let changeContent = e => {
+  if (selectedCell) {
+    newValue = e.target.innerText
+    if(rangeArr.map(e => e.innerText).includes(newValue)) {
+      selectedCell.innerText = newValue
+      rangeArr.forEach(el => el.innerText == selectedCell.innerText?(el.style.color="red", selectedCell.style.color="red"):(el.style.color="black", selectedCell.style.color="black"))
+    }
+    else {
+      selectedCell.innerText = newValue
+    }
+    Array.from(game.getElementsByClassName("cell")).forEach(e => e.innerText === selectedCell.innerText?e.style.background="#BCDFF9":null)
+  }
 }

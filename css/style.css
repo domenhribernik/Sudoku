@@ -3,7 +3,8 @@
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
-  border-collapse: collapse; }
+  border-collapse: collapse;
+  user-select: none; }
 
 .container {
   display: grid;
