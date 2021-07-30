@@ -8,6 +8,15 @@ let rangeArr = []
 let selectedCell
 let newValue
 
+document.addEventListener('keypress', e => {
+  var name = e.key;
+  var code = e.keyCode;
+  if (code>=49 && code<=57) {
+    selectedCell.innerText = name
+    console.log(`Key pressed ${name} \r\n Key code value: ${code}`);
+  }
+})
+
 let gameLoader = () => {
   generateGame()
   generateNumpad()
@@ -74,8 +83,7 @@ let changeSquare = e => {
   Array.from(game.getElementsByClassName("cell")).forEach(e => e.innerText !== "" && e.innerText === selectedCell.innerText?e.style.background="#BCDFF9":null)
   selectedCell.style.background = "#BCDFF9"
 }
-//red outline error - fix it 
-
+//fix hilighting issue (keybord, mouse click, all numbers outlined)
 //mini helper letters (make)
 
 //get sudoku array(make)
