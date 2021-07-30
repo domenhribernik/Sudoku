@@ -80,7 +80,8 @@ button, select, option {
   width: 60px;
   text-align: center;
   line-height: 60px;
-  font-size: 1rem;
+  font-size: 2rem;
+  font-weight: bold;
   font-family: monospace; }
 
 .numpad {
