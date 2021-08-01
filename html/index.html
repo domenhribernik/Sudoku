@@ -25,8 +25,20 @@
       <div class="options">
         <button class="restart">restart</button>
         <button class="comment">comment</button>
-        <button class="errase" onclick="testPuzzle(1)">errase</button>
+        <button class="errase">errase</button>
         <button class="hint">hint</button>
+      </div>
+      <div class="tester-buttons" style="margin-top: 100px; border: 2px solid black; border-radius: 20px; display: inline-block; padding: 20px;">
+        <div id="title">Testing</div>
+        <div>
+          <button class="load-next" onclick="testPuzzle(1)">Load Next</button>
+          <button class="solution" onclick="solutionPuzzle()">Solution</button>
+        </div>
+        <div>
+          <button class="rotate">Rotate</button>
+          <button class="map-num">Map Numbers</button>
+          <button class="shuffle-num">Shuffle Numbers</button>
+        </div>
       </div>
     </div>
   </div>
