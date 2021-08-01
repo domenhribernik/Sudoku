@@ -20,6 +20,10 @@ document.addEventListener('keypress', e => {
 let gameLoader = () => {
   generateGame()
   generateNumpad()
+  document.addEventListener('click', e => {
+    console.log(e.target);
+    e.target.classList.contains("cell")?null:game.childNodes.forEach(el => el.childNodes.forEach(element => element.style.background="white"))
+  })
 }
 
 let generateGame = () => {
@@ -74,18 +78,25 @@ let generateNumpad = () => {
     console.log(numpad);
 }
 
-let changeSquare = e => {
-  game.childNodes.forEach(e => e.childNodes.forEach(el => el.style.background = "white"))
-  selectedCell = e.target
-  console.log(selectedCell);
-  rangeArr = Array.from(game.getElementsByClassName(selectedCell.classList[0])).concat(Array.from(game.getElementsByClassName(selectedCell.classList[1])), Array.from(game.getElementsByClassName(selectedCell.classList[3])))
+let colorGrid = () => {
   rangeArr.forEach(e => e.style.background = "#E2EBF3")
   Array.from(game.getElementsByClassName("cell")).forEach(e => e.innerText !== "" && e.innerText === selectedCell.innerText?e.style.background="#BCDFF9":null)
   selectedCell.style.background = "#BCDFF9"
 }
+
+let changeSquare = e => {
+  game.childNodes.forEach(e => e.childNodes.forEach(el => el.style.background = "white"))
+  selectedCell = e.target
+  rangeArr = Array.from(game.getElementsByClassName(selectedCell.classList[0])).concat(Array.from(game.getElementsByClassName(selectedCell.classList[1])), Array.from(game.getElementsByClassName(selectedCell.classList[3])))
+  colorGrid()
+}
 //fix hilighting issue (keybord, mouse click, all numbers outlined, ALL ACTIONS HAVE TO HAVE HILIGHT UPDATE)
 //mini helper letters (make)
 //added numbers not bold!!!
+
+//exspand medium
+//exspand hard
+//extreme??
 
 //get sudoku array(make)
 //randomize sudoku (fresh effect)
