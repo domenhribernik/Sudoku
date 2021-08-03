@@ -23,7 +23,7 @@
       </select>
       <div class="numpad"></div>
       <div class="options">
-        <button class="restart">restart</button>
+        <button class="restart" onclick="restart()">restart</button>
         <button class="comment">comment</button>
         <button class="errase">erase</button>
         <button class="hint">hint</button>
@@ -31,12 +31,12 @@
       <div class="tester-buttons" style="margin-top: 100px; border: 2px solid black; border-radius: 20px; display: inline-block; padding: 20px;">
         <div id="title">Testing</div>
         <div>
-          <button class="load-next" onclick="testPuzzle(1)">Load next</button>
+          <button class="load-next" onclick="testPuzzle()">Load next</button>
           <button class="solution" onclick="solutionPuzzle()">Solution</button>
           <button class="order-numbers" onclick="orderSolution()">Order Numbers</button>
         </div>
         <div>
-          <button class="rotate">Rotate</button>
+          <button class="rotate" onclick="rotate()">Rotate</button>
           <button class="map-num">Map numbers</button>
           <button class="shuffle-num">Shuffle numbers</button>
         </div>

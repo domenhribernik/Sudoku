@@ -22,7 +22,7 @@ let gameLoader = () => {
   generateNumpad()
   document.addEventListener('click', e => {
     console.log(e.target);
-    e.target.classList.contains("cell")?null:game.childNodes.forEach(el => el.childNodes.forEach(element => element.style.background="white"))
+    //e.target.classList.contains("cell")?changeSquare(e):game.childNodes.forEach(el => el.childNodes.forEach(element => element.style.background="white"))
   })
 }
 
@@ -54,7 +54,6 @@ let generateGame = () => {
             i==2&&[0,3,6].includes(j)||i==5&&[0,3,6].includes(j)||i==8&&[0,3,6].includes(j)?cell.classList.add("col6"):
             i==2&&[1,4,7].includes(j)||i==5&&[1,4,7].includes(j)||i==8&&[1,4,7].includes(j)?cell.classList.add("col7"):
             i==2&&[2,5,8].includes(j)||i==5&&[2,5,8].includes(j)||i==8&&[2,5,8].includes(j)?cell.classList.add("col8"):null
-            cell.addEventListener("click", changeSquare)
             //cell.innerText = (i).toString()+"x"+(j).toString()
             cell.classList.add(`cell`, `cell${i}`)
             box.appendChild(cell)
@@ -94,8 +93,8 @@ let changeSquare = e => {
 //mini helper letters (make)
 //added numbers not bold!!!
 
-//exspand medium
-//exspand hard
+//expand medium
+//expand hard
 //extreme??
 
 //get sudoku array(make)
@@ -120,21 +119,30 @@ let changeContent = e => {
 }
 
 let index = -1
+let sudokuData = []
+let solutionData = []
 
-let testPuzzle = n => {
-  index+=n
+let restart = () => {
+  index-=1
+  testPuzzle()
+}
+
+let testPuzzle = () => {
+  index+=1
+  sudokuData.length==0?sudokuData=easySudoku[index][0]:null
   for (let i = 0; i < 9; i++) {
     for (let j = 0; j < 9; j++) {
-      game.childNodes[i].childNodes[j].innerText = easySudoku[index][0][i][j]==="0"?"":easySudoku[index][0][i][j]
+      game.childNodes[i].childNodes[j].innerText = sudokuData[i][j]==="0"?"":sudokuData[i][j]
       //check unique numbers - console.log(easySudoku[index][1][0].split("").sort())
     }
   }
 }
 
 let solutionPuzzle = () => {
+  solutionData = easySudoku[index][1]
   for (let i = 0; i < 9; i++) {
     for (let j = 0; j < 9; j++) {
-      game.childNodes[i].childNodes[j].innerText = easySudoku[index][1][i][j]==="0"?"":easySudoku[index][1][i][j]
+      game.childNodes[i].childNodes[j].innerText = solutionData[i][j]==="0"?"":solutionData[i][j]
     }
   }
 }
@@ -145,4 +153,12 @@ let orderSolution = () => {
       game.childNodes[i].childNodes[j].innerText = easySudoku[index][1][i][j]==="0"?"":easySudoku[index][1][i].split("").sort()[j]
     }
   }
+}
+
+let rotate = () => {
+  console.log(sudokuData);
+  let newArr = sudokuData.map((e, i, arr) => i<3?arr[(i+1)*3-1]:i>5?arr[(i-6)*3]:i==3?arr[i-2]:i==5?arr[i+2]:e)
+  sudokuData = newArr
+  restart()
+  console.log(newArr);
 }
