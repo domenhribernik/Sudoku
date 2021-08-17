@@ -127,9 +127,10 @@ let restart = () => {
   testPuzzle()
 }
 
-let testPuzzle = () => {
+let testPuzzle = (arr) => {
   index+=1
-  sudokuData.length==0?sudokuData=easySudoku[index][0]:null
+  console.log(index);
+  arr ? sudokuData = arr : sudokuData=easySudoku[index][0]
   for (let i = 0; i < 9; i++) {
     for (let j = 0; j < 9; j++) {
       game.childNodes[i].childNodes[j].innerText = sudokuData[i][j]==="0"?"":sudokuData[i][j]
@@ -159,6 +160,7 @@ let rotate = () => {
   console.log(sudokuData);
   let newArr = sudokuData.map((e, i, arr) => i<3?arr[(i+1)*3-1]:i>5?arr[(i-6)*3]:i==3?arr[i-2]:i==5?arr[i+2]:e)
   sudokuData = newArr
-  restart()
+  index-=1
+  testPuzzle(newArr)
   console.log(newArr);
 }
