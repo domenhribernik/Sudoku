@@ -21,8 +21,7 @@ let gameLoader = () => {
   generateGame()
   generateNumpad()
   document.addEventListener('click', e => {
-    console.log(e.target);
-    //e.target.classList.contains("cell")?changeSquare(e):game.childNodes.forEach(el => el.childNodes.forEach(element => element.style.background="white"))
+    e.target.classList.contains("cell")?changeSquare(e):game.childNodes.forEach(el => el.childNodes.forEach(element => element.style.background="white"))
   })
 }
 
@@ -124,10 +123,10 @@ let solutionData = []
 
 let restart = () => {
   index-=1
-  testPuzzle()
+  loadPuzzle()
 }
 
-let testPuzzle = (arr) => {
+let loadPuzzle = (arr) => {
   index+=1
   console.log(index);
   arr ? sudokuData = arr : sudokuData=easySudoku[index][0]
@@ -156,11 +155,21 @@ let orderSolution = () => {
   }
 }
 
-let rotate = () => {
+let rotate = () => { //fix the rotation (only one rotation is good) and add solution rotation
   console.log(sudokuData);
-  let newArr = sudokuData.map((e, i, arr) => i<3?arr[(i+1)*3-1]:i>5?arr[(i-6)*3]:i==3?arr[i-2]:i==5?arr[i+2]:e)
-  sudokuData = newArr
+  console.log(sudokuData.toString());
+  let newArr = []
+  console.log(sudokuData.map((e, i, arr) => i<3?arr[(i+1)*3-1]:i>5?arr[(i-6)*3]:i==3?arr[i-2]:i==5?arr[i+2]:e).forEach(el => el.split("").map((e, i, arr) => i<3?arr[(i+1)*3-1]:i>5?arr[(i-6)*3]:i==3?arr[i-2]:i==5?arr[i+2]:e)))
+  // sudokuData = newArr
   index-=1
-  testPuzzle(newArr)
+  // loadPuzzle(newArr)
   console.log(newArr);
+}
+
+let changeColor = () => {
+  document.querySelectorAll(".cell").forEach(e => e.innerText != "" ? e.style.color = `hsl(${parseInt(e.innerText+e.innerText)*54}, 80%, 50%)` : null)
+}
+
+let normalColor = () => {
+  document.querySelectorAll(".cell").forEach(e => e.style.color = "black")
 }
