@@ -157,13 +157,34 @@ let orderSolution = () => {
 
 let rotate = () => { //fix the rotation (only one rotation is good) and add solution rotation
   console.log(sudokuData);
-  let newArr = sudokuData.map((e, i, arr) => i<3?arr[(i+1)*3-1]:i>5?arr[(i-6)*3]:i==3?arr[i-2]:i==5?arr[i+2]:e)
-  sudokuData = []
-  newArr.map(el => sudokuData.push(el.split("").map((e, i, arr) => i<3?arr[(i+1)*3-1]:i>5?arr[(i-6)*3]:i==3?arr[i-2]:i==5?arr[i+2]:e).toString().replace(/,/g, '')))
-  console.log(sudokuData);
-  sudokuData = sudokuData
+  let newArr = []
+  sudokuData.map((e, i, arr) => i<3?arr[(i+1)*3-1]:i>5?arr[(i-6)*3]:i==3?arr[i-2]:i==5?arr[i+2]:e).map(el => newArr.push([...el].map((e, i, arr) => i<3?arr[(i+1)*3-1]:i>5?arr[(i-6)*3]:i==3?arr[i-2]:i==5?arr[i+2]:e).join("")))
+  console.log(newArr);
+  sudokuData = newArr
   index-=1
   loadPuzzle(sudokuData)
+}
+
+let mapNumbers = () => {
+  let [numbers, mappedNumbers] = [[],[]]
+  for (let i = 1; i < 10; i++) {
+    numbers.push(i) 
+    while (true) {
+      let rnd = Math.round(Math.random() * 10)
+      if (rnd != numbers[i]&&!mappedNumbers.includes(rnd)&&rnd>0&&rnd<10) {
+        mappedNumbers.push(rnd)
+        break
+      }
+    }
+  }
+  sudokuData = sudokuData.map(e => [...e].map(el => el=="0"?0:mappedNumbers[numbers.indexOf(parseInt(el))]).join(""))
+  index-=1
+  loadPuzzle(sudokuData)
+  mappedNumbers.map(e => console.log(numbers[mappedNumbers.indexOf(e)] + " = " + e))
+}
+
+let shuffleRows = () => {
+
 }
 
 let changeColor = () => {
