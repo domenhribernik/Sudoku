@@ -97,9 +97,8 @@ let changeSquare = e => {
 //extreme??
 
 //get sudoku array(make)
-//randomize sudoku (fresh effect)
-
-//2. map the values (1=3, 3=2, 2=9, 9=1 (exapmle))
+//randomize sudoku (fresh effect) 
+//!!MAKE THE SOLUTION WORK WITH IT!!
 //3. move the rows/columns that are in the same box (3x3)
 
 let changeContent = e => {
@@ -184,7 +183,13 @@ let mapNumbers = () => {
 }
 
 let shuffleRows = () => {
-
+  let [rowArr, colArr] = [[],[]]
+  for (let i = 0; i < 9; i++) {
+    rowArr.push(Array.from(document.querySelectorAll(`.row${i}`)).map(e => e.innerText==0?"0":e.innerText))
+    colArr.push(Array.from(document.querySelectorAll(`.col${i}`)).map(e => e.innerText==0?"0":e.innerText))
+  }
+  console.log(rowArr);
+  console.log(colArr);
 }
 
 let changeColor = () => {
