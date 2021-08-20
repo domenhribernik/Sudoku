@@ -98,7 +98,7 @@ let changeSquare = e => {
 
 //get sudoku array(make)
 //randomize sudoku (fresh effect)
-//1. rotate 1-3 times
+
 //2. map the values (1=3, 3=2, 2=9, 9=1 (exapmle))
 //3. move the rows/columns that are in the same box (3x3)
 
@@ -157,13 +157,13 @@ let orderSolution = () => {
 
 let rotate = () => { //fix the rotation (only one rotation is good) and add solution rotation
   console.log(sudokuData);
-  console.log(sudokuData.toString());
-  let newArr = []
-  console.log(sudokuData.map((e, i, arr) => i<3?arr[(i+1)*3-1]:i>5?arr[(i-6)*3]:i==3?arr[i-2]:i==5?arr[i+2]:e).forEach(el => el.split("").map((e, i, arr) => i<3?arr[(i+1)*3-1]:i>5?arr[(i-6)*3]:i==3?arr[i-2]:i==5?arr[i+2]:e)))
-  // sudokuData = newArr
+  let newArr = sudokuData.map((e, i, arr) => i<3?arr[(i+1)*3-1]:i>5?arr[(i-6)*3]:i==3?arr[i-2]:i==5?arr[i+2]:e)
+  sudokuData = []
+  newArr.map(el => sudokuData.push(el.split("").map((e, i, arr) => i<3?arr[(i+1)*3-1]:i>5?arr[(i-6)*3]:i==3?arr[i-2]:i==5?arr[i+2]:e).toString().replace(/,/g, '')))
+  console.log(sudokuData);
+  sudokuData = sudokuData
   index-=1
-  // loadPuzzle(newArr)
-  console.log(newArr);
+  loadPuzzle(sudokuData)
 }
 
 let changeColor = () => {
