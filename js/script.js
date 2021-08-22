@@ -154,6 +154,7 @@ let orderSolution = () => {
   }
 }
 
+let rotation = 0
 let rotate = () => { //fix the rotation (only one rotation is good) and add solution rotation
   console.log(sudokuData);
   let newArr = []
@@ -161,6 +162,8 @@ let rotate = () => { //fix the rotation (only one rotation is good) and add solu
   console.log(newArr);
   sudokuData = newArr
   index-=1
+  rotation < 3 ? rotation++ : rotation = 0
+  console.log("Rotation: " + rotation)
   loadPuzzle(sudokuData)
 }
 
@@ -179,7 +182,8 @@ let mapNumbers = () => {
   sudokuData = sudokuData.map(e => [...e].map(el => el=="0"?0:mappedNumbers[numbers.indexOf(parseInt(el))]).join(""))
   index-=1
   loadPuzzle(sudokuData)
-  mappedNumbers.map(e => console.log(numbers[mappedNumbers.indexOf(e)] + " = " + e))
+  console.log("Mapped numbers: ")
+  mappedNumbers.forEach(e => console.log(numbers[mappedNumbers.indexOf(e)] + " = " + e))
 }
 
 let shuffleRows = () => {
@@ -198,4 +202,13 @@ let changeColor = () => {
 
 let normalColor = () => {
   document.querySelectorAll(".cell").forEach(e => e.style.color = "black")
+}
+
+let countNumbers = () => {
+  let countArr = []
+  for (let i = 0; i <= 9; i++) {
+    countArr.push(0)
+  }
+  document.querySelectorAll(".cell").forEach(e => e.innerText!=""?countArr[e.innerText]+=1:countArr[0]+=1)
+  console.log(countArr);
 }
