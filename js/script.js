@@ -127,7 +127,7 @@ let restart = () => {
 
 let loadPuzzle = (arr) => {
   index+=1
-  console.log(index);
+  console.log("Puzzle: "+index);
   arr ? sudokuData = arr : sudokuData=easySudoku[index][0]
   for (let i = 0; i < 9; i++) {
     for (let j = 0; j < 9; j++) {
@@ -187,13 +187,33 @@ let mapNumbers = () => {
 }
 
 let shuffleRows = () => {
-  let [rowArr, colArr] = [[],[]]
+  let [rowArr, colArr, mapRowArr, mapColArr] = [[[],[],[]],[[],[],[]],[[],[],[]],[[],[],[]]]
   for (let i = 0; i < 9; i++) {
-    rowArr.push(Array.from(document.querySelectorAll(`.row${i}`)).map(e => e.innerText==0?"0":e.innerText))
-    colArr.push(Array.from(document.querySelectorAll(`.col${i}`)).map(e => e.innerText==0?"0":e.innerText))
+    rowArr[i<3?0:i<6?1:2].push(Array.from(document.querySelectorAll(`.row${i}`)).map(e => e.innerText==0?"0":e.innerText))
+    colArr[[i<3?0:i<6?1:2]].push(Array.from(document.querySelectorAll(`.col${i}`)).map(e => e.innerText==0?"0":e.innerText))
+  }
+  for (let i = 0; i < 9; i++) { //strange error with mod (%)
+    console.log(i%3 + "   " + i);
+    while (true) {
+      let rnd = Math.round(Math.random()*2)
+      if (!mapRowArr[i%3].includes(rnd)&&rnd>=0&&rnd<=2) {
+        mapRowArr[i%3].push(rnd)
+        break
+      }
+    }
+    while (true) {
+      let rnd = Math.round(Math.random()*2)
+      if (!mapColArr[i%3].includes(rnd)&&rnd>=0&&rnd<=2) {
+        mapColArr[i%3].push(rnd)
+        break
+      }
+    }
+    mapRowArr[0]==0||mapColArr[0]==0?(mapRowArr.shift(),mapColArr.shift(),i-=1):null
   }
   console.log(rowArr);
   console.log(colArr);
+  console.log(mapRowArr);
+  console.log(mapColArr);
 }
 
 let changeColor = () => {
