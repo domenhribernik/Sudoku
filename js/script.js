@@ -211,26 +211,24 @@ let shuffleRows = () => {
       }
     }
   }
-  console.log(rowArr);
-  console.log(colArr);
-  console.log(mapRowArr);
-  console.log(mapColArr);
   let [newRowArr, newColArr] = [[], []]
   rowArr.forEach((element, index) => element.forEach((e, i) => newRowArr.push(element[mapRowArr[index][i]])))
   console.log(newRowArr);
   colArr.forEach((element, index) => element.forEach((e, i) => newColArr.push(element[mapColArr[index][i]])))
   console.log(newColArr);
   let finalArr = ["", "", "", "", "", "", "", "", ""]
-  for (let i = 0; i < 3; i++) {
-    for (let j = 0; j < 3; j++) {
-      finalArr[i] += newRowArr[0][j+(i*3)] + newRowArr[1][j+(i*3)] + newRowArr[2][j+(i*3)]
-      finalArr[i+3] += newRowArr[3][j+(i*3)] + newRowArr[4][j+(i*3)] + newRowArr[5][j+(i*3)]
-      finalArr[i+6] += newRowArr[6][j+(i*3)] + newRowArr[7][j+(i*3)] + newRowArr[8][j+(i*3)]
+  for (let i = 0; i < 9; i+=3) {
+    for (let j = 0; j < 3; j++) { //rowSwap
+      finalArr[i] += newRowArr[i+j][0] + newRowArr[i+j][1] + newRowArr[i+j][2]
+      finalArr[i+1] += newRowArr[i+j][3] + newRowArr[i+j][4] + newRowArr[i+j][5]
+      finalArr[i+2] += newRowArr[i+j][6] + newRowArr[i+j][7] + newRowArr[i+j][8]
     }
-  } //problem is orientation (036147258) working on finalArray map!
-                           //(012345678)
+  } 
   console.log(sudokuData);
-  console.log(finalArr.map((e, i) =>  [0,4,8].contains(i)?e:[1,2]));
+  console.log(finalArr);
+  sudokuData = finalArr
+  i-=1
+  loadPuzzle(finalArr)
 }
 
 let changeColor = () => {
