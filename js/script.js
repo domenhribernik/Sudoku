@@ -190,7 +190,6 @@ let shuffleRows = () => {
   let [rowArr, colArr, mapRowArr, mapColArr] = [[[], [], []], [[], [], []], [[], [], []], [[], [], []]]
   for (let i = 0; i < 9; i++) {
     rowArr[i < 3 ? 0 : i < 6 ? 1 : 2].push(Array.from(document.querySelectorAll(`.row${i}`)).map(e => e.innerText == 0 ? "0" : e.innerText))
-    colArr[[i < 3 ? 0 : i < 6 ? 1 : 2]].push(Array.from(document.querySelectorAll(`.col${i}`)).map(e => e.innerText == 0 ? "0" : e.innerText))
   }
   for (let i = 0; i < 9; i++) { //strange error with mod (%)
     console.log(i % 3 + "   " + i);
@@ -214,21 +213,39 @@ let shuffleRows = () => {
   let [newRowArr, newColArr] = [[], []]
   rowArr.forEach((element, index) => element.forEach((e, i) => newRowArr.push(element[mapRowArr[index][i]])))
   console.log(newRowArr);
-  colArr.forEach((element, index) => element.forEach((e, i) => newColArr.push(element[mapColArr[index][i]])))
-  console.log(newColArr);
   let finalArr = ["", "", "", "", "", "", "", "", ""]
-  for (let i = 0; i < 9; i+=3) {
+  for (let i = 0; i < 9; i += 3) {
     for (let j = 0; j < 3; j++) { //rowSwap
-      finalArr[i] += newRowArr[i+j][0] + newRowArr[i+j][1] + newRowArr[i+j][2]
-      finalArr[i+1] += newRowArr[i+j][3] + newRowArr[i+j][4] + newRowArr[i+j][5]
-      finalArr[i+2] += newRowArr[i+j][6] + newRowArr[i+j][7] + newRowArr[i+j][8]
+      finalArr[i] += newRowArr[i + j][0] + newRowArr[i + j][1] + newRowArr[i + j][2]
+      finalArr[i + 1] += newRowArr[i + j][3] + newRowArr[i + j][4] + newRowArr[i + j][5]
+      finalArr[i + 2] += newRowArr[i + j][6] + newRowArr[i + j][7] + newRowArr[i + j][8]
     }
-  } 
+  }
   console.log(sudokuData);
   console.log(finalArr);
   sudokuData = finalArr
-  i-=1
+  index -= 1
   loadPuzzle(finalArr)
+  //before here i understand the workings
+  //after i do not (fix 3 rotation at bottom)
+  for (let i = 0; i < 9; i++) {
+    colArr[[i < 3 ? 0 : i < 6 ? 1 : 2]].push(Array.from(document.querySelectorAll(`.col${i}`)).map(e => e.innerText == 0 ? "0" : e.innerText))
+  }
+  colArr.forEach((element, index) => element.forEach((e, i) => newColArr.push(element[mapColArr[index][i]])))
+  console.log(newColArr);
+  finalArr = ["", "", "", "", "", "", "", "", ""]
+  for (let i = 0; i < 9; i += 3) {
+    for (let j = 0; j < 3; j++) { //col
+      finalArr[i] += newColArr[i + j][0] + newColArr[i + j][1] + newColArr[i + j][2]
+      finalArr[i + 1] += newColArr[i + j][3] + newColArr[i + j][4] + newColArr[i + j][5]
+      finalArr[i + 2] += newColArr[i + j][6] + newColArr[i + j][7] + newColArr[i + j][8]
+    }
+  }
+  console.log(sudokuData);
+  console.log(finalArr);
+  sudokuData = finalArr
+  index -= 1
+  loadPuzzle(sudokuData)
 }
 
 let changeColor = () => {
