@@ -227,9 +227,10 @@ let shuffleRows = () => {
       finalArr[i+3] += newRowArr[3][j+(i*3)] + newRowArr[4][j+(i*3)] + newRowArr[5][j+(i*3)]
       finalArr[i+6] += newRowArr[6][j+(i*3)] + newRowArr[7][j+(i*3)] + newRowArr[8][j+(i*3)]
     }
-  } //the logged output does not match
+  } //problem is orientation (036147258) working on finalArray map!
+                           //(012345678)
   console.log(sudokuData);
-  console.log(finalArr);
+  console.log(finalArr.map((e, i) =>  [0,4,8].contains(i)?e:[1,2]));
 }
 
 let changeColor = () => {
