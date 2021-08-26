@@ -187,7 +187,7 @@ let mapNumbers = () => {
 }
 
 let shuffleRows = () => {
-  let [rowArr, colArr, mapRowArr, mapColArr] = [[[], [], []], [[], [], []], [[], [], []], [[], [], []]]
+  let [rowArr, colArr, mapRowArr, mapColArr] = [[[], [], []], [], [[], [], []], [[], [], []]]
   for (let i = 0; i < 9; i++) {
     rowArr[i < 3 ? 0 : i < 6 ? 1 : 2].push(Array.from(document.querySelectorAll(`.row${i}`)).map(e => e.innerText == 0 ? "0" : e.innerText))
   }
@@ -210,9 +210,12 @@ let shuffleRows = () => {
       }
     }
   }
+  console.log("Row:");
+  console.log(mapRowArr);
+  console.log("Col:");
+  console.log(mapColArr);
   let [newRowArr, newColArr] = [[], []]
   rowArr.forEach((element, index) => element.forEach((e, i) => newRowArr.push(element[mapRowArr[index][i]])))
-  console.log(newRowArr);
   let finalArr = ["", "", "", "", "", "", "", "", ""]
   for (let i = 0; i < 9; i += 3) {
     for (let j = 0; j < 3; j++) { //rowSwap
@@ -221,28 +224,24 @@ let shuffleRows = () => {
       finalArr[i + 2] += newRowArr[i + j][6] + newRowArr[i + j][7] + newRowArr[i + j][8]
     }
   }
-  console.log(sudokuData);
-  console.log(finalArr);
   sudokuData = finalArr
   index -= 1
   loadPuzzle(finalArr)
   //before here i understand the workings
   //after i do not (fix 3 rotation at bottom)
   for (let i = 0; i < 9; i++) {
-    colArr[[i < 3 ? 0 : i < 6 ? 1 : 2]].push(Array.from(document.querySelectorAll(`.col${i}`)).map(e => e.innerText == 0 ? "0" : e.innerText))
+    colArr.push(Array.from(document.querySelectorAll(`.col${i}`)).map(e => e.innerText ? e.innerText : "0"))
   }
+  colArr = [colArr.splice(0,3), colArr.splice(0,3), colArr.splice(0,3)]
   colArr.forEach((element, index) => element.forEach((e, i) => newColArr.push(element[mapColArr[index][i]])))
-  console.log(newColArr);
   finalArr = ["", "", "", "", "", "", "", "", ""]
   for (let i = 0; i < 9; i += 3) {
-    for (let j = 0; j < 3; j++) { //col
+    for (let j = 0; j < 3; j++) { //colSwap
       finalArr[i] += newColArr[i + j][0] + newColArr[i + j][1] + newColArr[i + j][2]
       finalArr[i + 1] += newColArr[i + j][3] + newColArr[i + j][4] + newColArr[i + j][5]
       finalArr[i + 2] += newColArr[i + j][6] + newColArr[i + j][7] + newColArr[i + j][8]
     }
   }
-  console.log(sudokuData);
-  console.log(finalArr);
   sudokuData = finalArr
   index -= 1
   loadPuzzle(sudokuData)
