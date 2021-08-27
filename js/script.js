@@ -7,6 +7,10 @@ let gameArr = []
 let rangeArr = []
 let selectedCell
 let newValue
+let difficulty = 0
+let index = 0
+let [sudokuData, solutionData, orderData] = [[], [], []]
+let difArr = [easySudoku[index][0], mediumSudoku[index][0], hardSudoku[index][0]] //expertSudoku[index][0]
 
 document.addEventListener('keypress', e => {
   var name = e.key;
@@ -16,6 +20,16 @@ document.addEventListener('keypress', e => {
     console.log(`Key pressed ${name} \r\n Key code value: ${code}`);
   }
 })
+
+let difficultySelector = () => {
+  index = -1
+  difficulty = document.getElementById("difficulty").value;
+}
+
+let getArr = (i) => {
+  difArr = [easySudoku[index][i], mediumSudoku[index][i], hardSudoku[index][i]]
+  return difArr[difficulty]
+}
 
 let gameLoader = () => {
   generateGame()
@@ -89,17 +103,22 @@ let changeSquare = e => {
   colorGrid()
 }
 //fix hilighting issue (keybord, mouse click, all numbers outlined, ALL ACTIONS HAVE TO HAVE HILIGHT UPDATE)
+
 //mini helper letters (make)
-//added numbers not bold!!!
+
+//added numbers not bold
 
 //expand medium
 //expand hard
 //extreme??
 
-//get sudoku array(make)
-//randomize sudoku (fresh effect) 
-//!!MAKE THE SOLUTION WORK WITH IT!!
-//3. move the rows/columns that are in the same box (3x3)
+//check correctnes of unsolved sudoku with the solution
+
+//randomize sudoku with the 3 methods
+
+//fix easy sudoku (only goes to 10)
+
+
 
 let changeContent = e => {
   if (selectedCell) {
@@ -116,10 +135,6 @@ let changeContent = e => {
   }
 }
 
-let index = -1
-let sudokuData = []
-let solutionData = []
-
 let restart = () => {
   index -= 1
   loadPuzzle()
@@ -128,7 +143,7 @@ let restart = () => {
 let loadPuzzle = (arr) => {
   index += 1
   console.log("Puzzle: " + index);
-  arr ? sudokuData = arr : sudokuData = easySudoku[index][0]
+  arr ? sudokuData = arr : sudokuData = getArr(0)
   for (let i = 0; i < 9; i++) {
     for (let j = 0; j < 9; j++) {
       game.childNodes[i].childNodes[j].innerText = sudokuData[i][j] === "0" ? "" : sudokuData[i][j]
@@ -138,7 +153,7 @@ let loadPuzzle = (arr) => {
 }
 
 let solutionPuzzle = () => {
-  solutionData = easySudoku[index][1]
+  solutionData = getArr(1)
   for (let i = 0; i < 9; i++) {
     for (let j = 0; j < 9; j++) {
       game.childNodes[i].childNodes[j].innerText = solutionData[i][j] === "0" ? "" : solutionData[i][j]
@@ -147,9 +162,10 @@ let solutionPuzzle = () => {
 }
 
 let orderSolution = () => {
+  orderData = getArr(1)
   for (let i = 0; i < 9; i++) {
     for (let j = 0; j < 9; j++) {
-      game.childNodes[i].childNodes[j].innerText = easySudoku[index][1][i][j] === "0" ? "" : easySudoku[index][1][i].split("").sort()[j]
+      game.childNodes[i].childNodes[j].innerText = orderData[i][j] === "0" ? "" : orderData[i].split("").sort()[j]
     }
   }
 }
@@ -232,7 +248,7 @@ let shuffleRows = () => {
   for (let i = 0; i < 9; i++) {
     colArr.push(Array.from(document.querySelectorAll(`.col${i}`)).map(e => e.innerText ? e.innerText : "0"))
   }
-  colArr = [colArr.splice(0,3), colArr.splice(0,3), colArr.splice(0,3)]
+  colArr = [colArr.splice(0, 3), colArr.splice(0, 3), colArr.splice(0, 3)]
   colArr.forEach((element, index) => element.forEach((e, i) => newColArr.push(element[mapColArr[index][i]])))
   finalArr = ["", "", "", "", "", "", "", "", ""]
   for (let i = 0; i < 9; i += 3) {

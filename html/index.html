@@ -15,7 +15,7 @@
     <div class="right-container">
       <div id="title">Sudoku</div>
       <button onclick="generateGame(), generateNumpad()">Create Game</button>
-      <select name="difficulty" id="difficulty">
+      <select name="difficulty" id="difficulty" onchange="difficultySelector()">
         <option value="0" selected>Easy</option>
         <option value="1">Medium</option>
         <option value="2">Hard</option>
