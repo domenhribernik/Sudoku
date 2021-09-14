@@ -40,6 +40,7 @@ let gameLoader = () => {
 }
 
 let generateGame = () => {
+  difficultySelector();
   for (let i = 0; i < gameSize; i++) {
     let boxArr = []
     let box = document.createElement("div")
@@ -144,6 +145,7 @@ let loadPuzzle = (arr) => {
   index += 1
   console.log("Puzzle: " + index);
   arr ? sudokuData = arr : sudokuData = getArr(0)
+  
   for (let i = 0; i < 9; i++) {
     for (let j = 0; j < 9; j++) {
       game.childNodes[i].childNodes[j].innerText = sudokuData[i][j] === "0" ? "" : sudokuData[i][j]
@@ -162,7 +164,7 @@ let solutionPuzzle = () => {
 }
 
 let orderSolution = () => {
-  orderData = getArr(1)
+  orderData = getArr(1) 
   for (let i = 0; i < 9; i++) {
     for (let j = 0; j < 9; j++) {
       game.childNodes[i].childNodes[j].innerText = orderData[i][j] === "0" ? "" : orderData[i].split("").sort()[j]
