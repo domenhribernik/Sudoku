@@ -75,6 +75,9 @@ button, select, option {
   height: 180px;
   width: 180px; }
 
+div.added {
+  font-weight: normal; }
+
 .cell {
   height: 60px;
   width: 60px;

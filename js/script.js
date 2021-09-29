@@ -19,6 +19,9 @@ document.addEventListener('keypress', e => {
     selectedCell.innerText = name
     console.log(`Key pressed ${name} \r\n Key code value: ${code}`);
   }
+  else {
+    keyboardInput = false
+  }
 })
 
 let difficultySelector = () => {
@@ -109,17 +112,11 @@ let changeSquare = e => {
 
 //added numbers not bold
 
-//expand medium
-//expand hard
 //extreme??
 
 //check correctnes of unsolved sudoku with the solution
 
 //randomize sudoku with the 3 methods
-
-//fix easy sudoku (only goes to 10)
-
-
 
 let changeContent = e => {
   if (selectedCell) {
@@ -148,7 +145,9 @@ let loadPuzzle = (arr) => {
   
   for (let i = 0; i < 9; i++) {
     for (let j = 0; j < 9; j++) {
-      game.childNodes[i].childNodes[j].innerText = sudokuData[i][j] === "0" ? "" : sudokuData[i][j]
+      game.childNodes[i].childNodes[j].innerText = sudokuData[i][j] === "0" ? 
+      "" : sudokuData[i][j]
+      game.childNodes[i].childNodes[j].innerText === "" ? game.childNodes[i].childNodes[j].classList.add("added") : game.childNodes[i].childNodes[j].classList.remove("added")
       //check unique numbers - console.log(easySudoku[index][1][0].split("").sort())
     }
   }
