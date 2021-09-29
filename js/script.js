@@ -15,7 +15,7 @@ let difArr = [easySudoku[index][0], mediumSudoku[index][0], hardSudoku[index][0]
 document.addEventListener('keypress', e => {
   var name = e.key;
   var code = e.keyCode;
-  if (code >= 49 && code <= 57) {
+  if (code >= 49 && code <= 57 && selectedCell.classList.contains('added') && selectedCell) {
     selectedCell.innerText = name
     console.log(`Key pressed ${name} \r\n Key code value: ${code}`);
   }
@@ -104,13 +104,12 @@ let changeSquare = e => {
   game.childNodes.forEach(e => e.childNodes.forEach(el => el.style.background = "white"))
   selectedCell = e.target
   rangeArr = Array.from(game.getElementsByClassName(selectedCell.classList[0])).concat(Array.from(game.getElementsByClassName(selectedCell.classList[1])), Array.from(game.getElementsByClassName(selectedCell.classList[3])))
+  console.log(rangeArr);
   colorGrid()
 }
 //fix hilighting issue (keybord, mouse click, all numbers outlined, ALL ACTIONS HAVE TO HAVE HILIGHT UPDATE)
 
 //mini helper letters (make)
-
-//added numbers not bold
 
 //extreme??
 
@@ -119,7 +118,7 @@ let changeSquare = e => {
 //randomize sudoku with the 3 methods
 
 let changeContent = e => {
-  if (selectedCell) {
+  if (selectedCell && selectedCell.classList.contains('added')) {
     newValue = e.target.innerText
     if (rangeArr.map(e => e.innerText).includes(newValue)) {
       selectedCell.innerText = newValue
