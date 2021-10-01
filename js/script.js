@@ -18,6 +18,7 @@ document.addEventListener('keypress', e => {
   if (code >= 49 && code <= 57 && selectedCell.classList.contains('added') && selectedCell) {
     selectedCell.innerText = name
     console.log(`Key pressed ${name} \r\n Key code value: ${code}`);
+    colorGrid()
   }
   else {
     keyboardInput = false
@@ -96,7 +97,21 @@ let generateNumpad = () => {
 
 let colorGrid = () => {
   rangeArr.forEach(e => e.style.background = "#E2EBF3")
-  Array.from(game.getElementsByClassName("cell")).forEach(e => e.innerText !== "" && e.innerText === selectedCell.innerText ? e.style.background = "#BCDFF9" : null)
+  let i = 0
+  rangeArr.forEach(e => {
+    if (e.innerText === selectedCell.innerText) {
+      i += 1
+      if (i > 3) {
+      e.style.color = "red"
+      selectedCell.color = "red"
+      }
+    }
+    else {
+      e.style.color = "black"
+      selectedCell.color = "black"
+    }
+  })
+  Array.from(game.getElementsByClassName("cell")).forEach(e => e.innerText !== "" && e.innerText === selectedCell.innerText ? e.style.background = "#BCDFF9" : e.style.background= "white")
   selectedCell.style.background = "#BCDFF9"
 }
 
@@ -111,6 +126,8 @@ let changeSquare = e => {
 
 //mini helper letters (make)
 
+//when feild is deselected selected value has to be none
+
 //extreme??
 
 //check correctnes of unsolved sudoku with the solution
@@ -122,7 +139,7 @@ let changeContent = e => {
     newValue = e.target.innerText
     if (rangeArr.map(e => e.innerText).includes(newValue)) {
       selectedCell.innerText = newValue
-      rangeArr.forEach(el => el.innerText === newValue ? el.style.color = "red" : el.style.color = "black")
+      colorGrid()
     }
     else {
       selectedCell.innerText = newValue
