@@ -39,7 +39,7 @@ let gameLoader = () => {
   generateGame()
   generateNumpad()
   document.addEventListener('click', e => {
-    e.target.classList.contains("cell") ? changeSquare(e) : game.childNodes.forEach(el => el.childNodes.forEach(element => element.style.background = "white"))
+    e.target.classList.contains("cell") ? changeSquare(e) : game.childNodes.forEach(el => el.childNodes.forEach(element => element.style.background = "white"));
   })
 }
 
@@ -96,23 +96,23 @@ let generateNumpad = () => {
 }
 
 let colorGrid = () => {
-  rangeArr.forEach(e => e.style.background = "#E2EBF3")
-  let i = 0
+  rangeArr.forEach(e => e.style.background = "#E2EBF3");
+  let i = 0;
   rangeArr.forEach(e => {
     if (e.innerText === selectedCell.innerText) {
-      i += 1
+      i += 1;
       if (i > 3) {
-      e.style.color = "red"
-      selectedCell.color = "red"
+        e.style.color = "red";
+        selectedCell.color = "red";
       }
     }
     else {
-      e.style.color = "black"
-      selectedCell.color = "black"
+      e.style.color = "black";
+      selectedCell.color = "black";
     }
   })
-  Array.from(game.getElementsByClassName("cell")).forEach(e => e.innerText !== "" && e.innerText === selectedCell.innerText ? e.style.background = "#BCDFF9" : e.style.background= "white")
-  selectedCell.style.background = "#BCDFF9"
+  Array.from(game.getElementsByClassName("cell")).forEach(e => e.innerText !== "" && e.innerText === selectedCell.innerText ? e.style.background = "#BCDFF9" : e.style.background= "white");
+  selectedCell.style.background = "#BCDFF9";
 }
 
 let changeSquare = e => {
@@ -122,17 +122,6 @@ let changeSquare = e => {
   console.log(rangeArr);
   colorGrid()
 }
-//fix hilighting issue (keybord, mouse click, all numbers outlined, ALL ACTIONS HAVE TO HAVE HILIGHT UPDATE)
-
-//mini helper letters (make)
-
-//when feild is deselected selected value has to be none
-
-//extreme??
-
-//check correctnes of unsolved sudoku with the solution
-
-//randomize sudoku with the 3 methods
 
 let changeContent = e => {
   if (selectedCell && selectedCell.classList.contains('added')) {
@@ -148,6 +137,24 @@ let changeContent = e => {
     Array.from(game.getElementsByClassName("cell")).forEach(e => e.innerText === selectedCell.innerText ? e.style.background = "#BCDFF9" : null)
   }
 }
+
+//fix hilighting issue (keybord, mouse click, all numbers outlined, ALL ACTIONS HAVE TO HAVE HILIGHT UPDATE)
+
+//mini helper letters (make)
+
+//when feild is deselected selected value has to be none
+
+//extreme??
+
+//check correctnes of unsolved sudoku with the solution
+
+//randomize sudoku with the 3 methods
+
+//keycode is depricated
+
+//fix buttons for testing
+
+//check if game generation is correct
 
 let newGame = () => {
   
