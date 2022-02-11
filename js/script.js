@@ -149,6 +149,10 @@ let changeContent = e => {
   }
 }
 
+let newGame = () => {
+  
+}
+
 let restart = () => {
   index -= 1
   loadPuzzle()

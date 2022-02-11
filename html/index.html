@@ -10,11 +10,12 @@
 <body onload="gameLoader()">
   <div class="container">
     <div class="left-container">
+      <div class="title">Sudoku</div>
+      <div class="subtitle">[by Domen Hribernik]</div>
       <div id="game"></div>
     </div>
     <div class="right-container">
-      <div id="title">Sudoku</div>
-      <button onclick="generateGame(), generateNumpad()">Create Game</button>
+      <button onclick="newGame()">New Game</button>
       <select name="difficulty" id="difficulty" onchange="difficultySelector()">
         <option value="0" selected>Easy</option>
         <option value="1">Medium</option>
@@ -28,8 +29,8 @@
         <button class="errase">erase</button>
         <button class="hint">hint</button>
       </div>
-      <div class="tester-buttons" style="margin-top: 100px; border: 2px solid black; border-radius: 20px; display: inline-block; padding: 20px;">
-        <div id="title">Testing</div>
+      <div class="tester-buttons">
+        <div class="title">Testing</div>
         <div>
           <button class="load-next" onclick="loadPuzzle()">Load next</button>
           <button class="solution" onclick="solutionPuzzle()">Solution</button>
