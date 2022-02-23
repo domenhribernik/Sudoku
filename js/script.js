@@ -96,22 +96,19 @@ let generateNumpad = () => {
 }
 
 let colorGrid = () => {
-  rangeArr.forEach(e => e.style.background = "#E2EBF3");
-  let i = 0;
   rangeArr.forEach(e => {
-    if (e.innerText === selectedCell.innerText) {
-      i += 1;
-      if (i > 3) {
-        e.style.color = "red";
-        selectedCell.color = "red";
-      }
+    if (e.innerText === selectedCell.innerText && e !== selectedCell && e.innerText != "") {
+      e.style.color = "red";
+      selectedCell.style.color = "red";
+      console.log(selectedCell);
     }
     else {
       e.style.color = "black";
-      selectedCell.color = "black";
+      selectedCell.style.color = "black";
     }
   })
   Array.from(game.getElementsByClassName("cell")).forEach(e => e.innerText !== "" && e.innerText === selectedCell.innerText ? e.style.background = "#BCDFF9" : e.style.background= "white");
+  rangeArr.forEach(e => e.style.background = "#E2EBF3");
   selectedCell.style.background = "#BCDFF9";
 }
 
@@ -119,7 +116,7 @@ let changeSquare = e => {
   game.childNodes.forEach(e => e.childNodes.forEach(el => el.style.background = "white"))
   selectedCell = e.target
   rangeArr = Array.from(game.getElementsByClassName(selectedCell.classList[0])).concat(Array.from(game.getElementsByClassName(selectedCell.classList[1])), Array.from(game.getElementsByClassName(selectedCell.classList[3])))
-  console.log(rangeArr);
+  // console.log(rangeArr);
   colorGrid()
 }
 

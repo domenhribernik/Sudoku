@@ -1,8 +1,9 @@
 #https://www.extremesudoku.info/
-
-import time
+import time 
 import pyperclip
 import pyautogui
+
+file = 'solution.txt'
 
 def copy_clipboard():
   pyperclip.copy('')
@@ -16,7 +17,7 @@ def listToString(s):
     for ele in s: 
         str1 += ele  
     return str1
-
+  
 def copyContent():
   arr = []
   for x in range(0,81):
@@ -27,53 +28,25 @@ def copyContent():
     pyautogui.press("tab")
   print(arr)
   sudoku = listToString(arr)
-  f = open('solution.txt', 'a')
+  f = open(file, 'a')
   f.write(sudoku+'\n')
   f.close()
-
+  
 time.sleep(5)
 pyautogui.press("tab")
-
-while True:
+while True: #5277
   pyautogui.press("tab")
   pyautogui.press("down")
   for x in range(0,4):
     pyautogui.press("tab")
-  time.sleep(1)
   for x in range(0,5):
     pyautogui.press("tab")
-    
-  time.sleep(1)
   copyContent()
-  time.sleep(1)
-  
   for x in range(0,9):
     pyautogui.press("tab")
-  time.sleep(1)
   pyautogui.press("enter")
-  time.sleep(1)
   for x in range(0,27):
     pyautogui.press("tab")
-    
-  time.sleep(1)
   copyContent()
-  time.sleep(1)
-  
   for x in range(0,26):
     pyautogui.press("tab")
-  time.sleep(1)
-  
-  f = open('solution.txt', 'a')
-  f.write('\n')
-  f.close()
-
-# start
-# 2t to select year (first time 1 down)
-# 4t evil
-# excessive, egregious, excrutiating, extreme
-#
-#
-#
-#
-#
-#
