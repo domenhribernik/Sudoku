@@ -5,8 +5,8 @@ const boxSize = 3;
 const numpadSize = 3;
 let gameArr = [];
 let rangeArr = [];
-let selectedCell;
-let newValue;
+let selectedCell = "";
+let newValue = "";
 let difficulty = 0;
 let index = 0;
 let [sudokuData, solutionData, orderData] = [[], [], []];
@@ -15,11 +15,12 @@ let difArr = [easySudoku[index][0], mediumSudoku[index][0], hardSudoku[index][0]
 document.addEventListener('keypress', e => {
   var name = e.key;
   var code = e.keyCode;
-  if (code >= 49 && code <= 57 && selectedCell.classList.contains('added') && selectedCell) {
-    selectedCell.innerText = name;
-    console.log(`Key pressed ${name} \r\n Key code value: ${code}`);
-    colorGrid();
-    colorLetters();
+  if (code >= 49 && code <= 57 && selectedCell != "") {
+    if (selectedCell.classList.contains('added')) {
+      selectedCell.innerText = name;
+      console.log(`Key pressed ${name} \r\n Key code value: ${code}`);
+      colorGrid();
+    }
   }
   else {
     keyboardInput = false;
@@ -40,7 +41,8 @@ let gameLoader = () => {
   generateGame();
   generateNumpad();
   document.addEventListener('click', e => {
-    e.target.classList.contains("cell") ? changeSquare(e) : game.childNodes.forEach(el => el.childNodes.forEach(element => element.style.background = "white"));
+    e.target.classList.contains("cell") ? changeSquare(e) : deselectSquare(e);
+    console.log(selectedCell);
   })
 }
 
@@ -102,60 +104,38 @@ let colorGrid = () => {
   selectedCell.style.background = "#BCDFF9";
 }
 
-let colorLetters = () => {
-  rangeArr.forEach(e => {
-    if (e.innerText === selectedCell.innerText && e !== selectedCell && e.innerText != "") {
-      e.style.color = "red";
-    }
-    else {
-      e.style.color = "black";
-    }
-    if (e.style.color == "red") {
-      selectedCell.style.color = "red";
-    }
-  })
+let deselectSquare = e => {
+  game.childNodes.forEach(el => el.childNodes.forEach(element => element.style.background = "white"));
+  selectedCell = "";
 }
 
 let changeSquare = e => {
   game.childNodes.forEach(e => e.childNodes.forEach(el => el.style.background = "white"));
   selectedCell = e.target;
   rangeArr = Array.from(game.getElementsByClassName(selectedCell.classList[0])).concat(Array.from(game.getElementsByClassName(selectedCell.classList[1])), Array.from(game.getElementsByClassName(selectedCell.classList[3])));
-  // console.log(rangeArr);
   colorGrid();
 }
 
 let changeContent = e => {
-  if (selectedCell && selectedCell.classList.contains('added')) {
+  if (selectedCell != "" && selectedCell.classList.contains('added')) {
     newValue = e.target.innerText;
-    if (rangeArr.map(e => e.innerText).includes(newValue)) {
-      selectedCell.innerText = newValue;
-      colorGrid();
-    }
-    else {
-      selectedCell.innerText = newValue;
-      rangeArr.forEach(el => el.style.color = "black");
-    }
-    Array.from(game.getElementsByClassName("cell")).forEach(e => e.innerText === selectedCell.innerText ? e.style.background = "#BCDFF9" : null);
+    selectedCell.innerText = newValue;
+    colorGrid();
   }
 }
 
-//fix hilighting issue (keybord, mouse click, all numbers outlined, ALL ACTIONS HAVE TO HAVE HILIGHT UPDATE)
+//the best thing is to redo it simple and then add complexity
 
 //mini helper letters (make)
-
-//when feild is deselected selected value has to be none
-
 //extreme??
-
-//check correctnes of unsolved sudoku with the solution
-
+//combine keyboard and pad logic (make it work with the same function)
+// add erase option
+//check correctnes of unsolved sudoku with the solution (only for hints)
 //randomize sudoku with the 3 methods
-
 //keycode is depricated
-
 //fix buttons for testing
-
 //check if game generation is correct
+// add alot of shortcuts for only keyboard use and add modal for the tutorial
 
 let newGame = () => {
   
