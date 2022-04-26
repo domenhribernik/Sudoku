@@ -6,26 +6,21 @@ const numpadSize = 3;
 let gameArr = [];
 let rangeArr = [];
 let selectedCell = "";
-let newValue = "";
 let difficulty = 0;
 let index = 0;
 let [sudokuData, solutionData, orderData] = [[], [], []];
 let difArr = [easySudoku[index][0], mediumSudoku[index][0], hardSudoku[index][0]]; //expertSudoku[index][0]
 
-document.addEventListener('keypress', e => {
-  var name = e.key;
-  var code = e.keyCode;
-  if (code >= 49 && code <= 57 && selectedCell != "") {
-    if (selectedCell.classList.contains('added')) {
-      selectedCell.innerText = name;
-      console.log(`Key pressed ${name} \r\n Key code value: ${code}`);
-      colorGrid();
-    }
+let changeContent = e => {
+  let value = e.type == "keypress" ? e.key : e.target.innerText;
+  if (value > 0 && value < 10 && selectedCell != "" && selectedCell.classList.contains('added')) {
+    selectedCell.innerText = value;
+    //console.log(`Key pressed ${value} \r\n Key code value: ${value}`);
+    colorGrid();
   }
-  else {
-    keyboardInput = false;
-  }
-})
+}
+
+document.addEventListener('keypress', changeContent);
 
 let difficultySelector = () => {
   index = -1;
@@ -116,29 +111,24 @@ let changeSquare = e => {
   colorGrid();
 }
 
-let changeContent = e => {
-  if (selectedCell != "" && selectedCell.classList.contains('added')) {
-    newValue = e.target.innerText;
-    selectedCell.innerText = newValue;
-    colorGrid();
-  }
-}
-
 //the best thing is to redo it simple and then add complexity
 
 //mini helper letters (make)
 //extreme??
-//combine keyboard and pad logic (make it work with the same function)
-// add erase option
-//check correctnes of unsolved sudoku with the solution (only for hints)
+// COLOR SQUARE
+//check correctnes of finished soduku or give up button? (not while the player is playing)
 //randomize sudoku with the 3 methods
-//keycode is depricated
+//add timer
 //fix buttons for testing
 //check if game generation is correct
-// add alot of shortcuts for only keyboard use and add modal for the tutorial
+// add alot of shortcuts for only keyboard use and add modal for the tutorial for shortcuts and shit
 
 let newGame = () => {
-  
+  index = Math.floor((Math.random() * easySudoku.length));
+  index == easySudoku.length ? index-- : null;
+  console.log(index); 
+  getArr(0);
+  loadPuzzle(difArr[difficulty]);
 }
 
 let restart = () => {
@@ -150,8 +140,19 @@ let restart = () => {
   })
 }
 
+let eraseSelected = () => {
+  if (selectedCell && selectedCell.classList.contains("added")) {
+    selectedCell.innerText = "";
+    selectedCell = null;
+  } 
+}
+
+let addHint = () => {
+
+}
+
 let loadPuzzle = (arr) => {
-  index += 1
+  index++;
   console.log("Puzzle: " + index);
   arr ? sudokuData = arr : sudokuData = getArr(0);
   
